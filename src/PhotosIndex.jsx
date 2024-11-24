@@ -1,4 +1,4 @@
-export function PhotosIndex({ photos }) {
+export function PhotosIndex({ photos, onShow }) {
   return (
     <div>
       <h1>All Products ({photos.length} total)</h1>
@@ -15,6 +15,7 @@ export function PhotosIndex({ photos }) {
           <p>Tax: ${photo.tax}</p>
           <p>Total: ${photo.total}</p>
           <p>Description: {photo.description}</p>
+          <button onClick={() => onShow(photo)}>More info</button>
         </div>
       ))}
     </div>
