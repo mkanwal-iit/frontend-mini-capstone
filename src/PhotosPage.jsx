@@ -29,6 +29,22 @@ export function PhotosPage() {
     setIsPhotosShowVisible(true);
     setCurrentPhoto(photo);
   };
+  const handleUpdate = (photo, params, successCallback) => {
+    console.log("handleUpdate");
+    axios.patch(`/products/${photo.id}.json`, params).then((response) => {
+      setPhotos(
+        photos.map((p) => {
+          if (p.id === response.data.id) {
+            return response.data;
+          } else {
+            return p;
+          }
+        })
+      );
+      successCallback();
+      setIsPhotosShowVisible(false);
+    });
+  };
 
   useEffect(handleIndex, []);
   return (
@@ -36,7 +52,7 @@ export function PhotosPage() {
       <PhotosNew onCreate={handleCreate} />
       <PhotosIndex photos={photos} onShow={handleShow} />
       <Modal show={isPhotosShowVisible} onClose={() => setIsPhotosShowVisible(false)}>
-        <PhotosShow photo={currentPhoto} />
+        <PhotosShow photo={currentPhoto} onUpdate={handleUpdate} />
       </Modal>
     </main>
   );
