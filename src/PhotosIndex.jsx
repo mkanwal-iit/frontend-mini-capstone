@@ -5,7 +5,12 @@ export function PhotosIndex({ photos }) {
       {photos.map((photo) => (
         <div key={photo.id}>
           <h2>{photo.name}</h2>
-          <img src={photo.primary_image_url} alt={photo.name} />
+          <img
+            src={
+              photo.primary_image_url || "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+            }
+            alt={photo.name}
+          />
           <p>Price: ${photo.price}</p>
           <p>Tax: ${photo.tax}</p>
           <p>Total: ${photo.total}</p>
