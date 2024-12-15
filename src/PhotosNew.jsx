@@ -1,4 +1,4 @@
-export function PhotosNew({ onCreate }) {
+export function PhotosNew({ onCreate, errors, status }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
@@ -9,6 +9,7 @@ export function PhotosNew({ onCreate }) {
   return (
     <div>
       <h1>New Product</h1>
+      {status ? <img src={`https://http.cat/${status}`} /> : null}
       <form onSubmit={handleSubmit}>
         <div>
           Name: <input name="name" type="text" required />

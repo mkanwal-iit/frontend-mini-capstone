@@ -45,6 +45,19 @@ export function PhotosPage() {
       setIsPhotosShowVisible(false);
     });
   };
+  const handleAddToCart = (params) => {
+    axios.post("/carted_products.json", params).then((response) => {
+      console.log(response);
+      setIsPhotosShowVisible(false);
+    });
+  };
+  const handleDestroy = (photo) => {
+    console.log("handleDestroy", photo);
+    axios.delete(`/products/${photo.id}.json`).then(() => {
+      setPhotos(photos.filter((p) => p.id !== photo.id));
+      setIsPhotosShowVisible(false);
+    });
+  };
 
   useEffect(handleIndex, []);
   return (
@@ -52,7 +65,12 @@ export function PhotosPage() {
       <PhotosNew onCreate={handleCreate} />
       <PhotosIndex photos={photos} onShow={handleShow} />
       <Modal show={isPhotosShowVisible} onClose={() => setIsPhotosShowVisible(false)}>
-        <PhotosShow photo={currentPhoto} onUpdate={handleUpdate} />
+        <PhotosShow
+          product={currentPhoto}
+          onUpdate={handleUpdate}
+          onDestroy={handleDestroy}
+          onAddToCart={handleAddToCart}
+        />
       </Modal>
     </main>
   );
