@@ -11,7 +11,8 @@ import { PhotosNewPage } from "./PhotosNewPage";
 import { PhotosShowPage } from "./PhotosShowPage";
 import { Footer } from "./Footer";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://mini-capstone-api-3r9x.onrender.com";
 axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
