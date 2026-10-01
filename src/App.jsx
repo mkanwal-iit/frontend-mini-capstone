@@ -11,8 +11,11 @@ import { PhotosNewPage } from "./PhotosNewPage";
 import { PhotosShowPage } from "./PhotosShowPage";
 import { Footer } from "./Footer";
 
+// Read the API host from the environment rather than hardcoding it: the
+// deployed API's hostname has changed once already, which left this pointing at
+// a service that no longer exists. Falls back to the local Rails server.
 axios.defaults.baseURL =
-  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://mini-capstone-api-3r9x.onrender.com";
+  import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
